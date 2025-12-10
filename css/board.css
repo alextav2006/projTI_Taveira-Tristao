@@ -109,12 +109,12 @@ body {
 
 
 .piece-moved {
-  animation: pieceMoveSoft 0.18s ease-out;
+  animation: pieceMoveSoft 0.3s ease-out;
 }
 
 
 .captured-anim {
-  animation: pieceCaptureSpin 1s ease-out forwards;
+  animation: pieceCaptureSpin 0.6s ease-out forwards;
   z-index: 5;
   position: relative;
 }
