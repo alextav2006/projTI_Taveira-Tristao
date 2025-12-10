@@ -1,6 +1,6 @@
 :root {
-  --light: #b8b4ad;
-  --dark: #1388b2;
+  --light: #F0D9B5;
+  --dark: #8b4513ca;
   --sel: #fffa8b;
 }
 
@@ -26,6 +26,15 @@ body {
   padding: 16px;
 }
 
+shah {
+    color: rgba(231, 154, 11, 0.871);
+    font-size: 1.15em;
+}
+
+#shah {
+    color:#c8c7c7;
+}
+
 .game-area {
   display: flex;
   justify-content: center;
@@ -36,7 +45,7 @@ body {
   display: grid;
   grid-template-columns: repeat(8, 64px);
   grid-template-rows: repeat(8, 64px);
-  border: 6px solid #333;
+  border: 5px solid #443;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
   background: #695f5ff6;
 }
@@ -57,14 +66,19 @@ body {
   font-size: 34px;
   user-select: none;
   cursor: pointer;
+
+  background-size: cover;
+  background-repeat: repeat;
+  background-blend-mode: multiply;
+  background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
 }
 
 .sq.light {
-  background: var(--light);
+  background-color: var(--light);
 }
 
 .sq.dark {
-  background: var(--dark);
+  background-color: var(--dark);
 }
 
 .sq.sel {
@@ -108,21 +122,18 @@ body {
   animation: capturePulse 1s ease-in-out infinite;
 }
 
-.piece-ghost {
-  position: absolute;
-  width: 64px;
-  height: 64px;
+.piece-img {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
   pointer-events: none;
-  z-index: 10;
-}
 
-.piece-ghost-moving {
-  transition: top 0.18s ease-out, left 0.18s ease-out;
+  transition: transform 0.18s ease-out;
 }
 
 
 .captured-anim {
-  animation: pieceCaptureSpin 0.6s ease-out forwards;
+  animation: pieceCaptureSpin 0.41s ease-out forwards;
   z-index: 5;
   position: relative;
 }
@@ -154,17 +165,34 @@ body {
 }
 
 button {
-  background: #444;
-  border: none;
-  color: #fff;
-  padding: 8px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
+    background: #3cba54; /* verde estilo chess.com */
+    border: none;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+
+    /* leve sombra */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+
+    /* suavidade */
+    transition: background 0.15s ease, 
+                transform 0.1s ease, 
+                box-shadow 0.15s ease;
 }
 
 button:hover {
-  background: #555;
+    background: #34a44b;  /* ligeiramente mais escuro */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.35);
+}
+
+button:active {
+    transform: translateY(0px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+    background: #2e8f40;
 }
 
 .fen-wrapper {
@@ -225,4 +253,30 @@ button:hover {
   100% {
     transform: scale(1) translateY(0);
   }
+}
+
+
+#tempo {
+    display: flex;
+    background-color: #443;
+    padding: 5px;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+}
+#clock-w {
+    display: inline-flex;
+    background-color: white;
+    color: black;
+    font-size: 2em;
+    width: 49%;
+    justify-content: center;
+}
+
+#clock-b {
+    display: inline-flex;
+    background-color: black;
+    color: white;
+    font-size: 2em;
+    width: 49%;
+    justify-content: center;
 }
