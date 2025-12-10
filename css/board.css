@@ -1,0 +1,215 @@
+:root {
+  --light: #b8b4ad;
+  --dark: #1388b2;
+  --sel: #fffa8b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  background: #201f1f;
+  color: #eee;
+}
+
+.container {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  padding: 16px;
+}
+
+.game-area {
+  display: flex;
+  justify-content: center;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(8, 64px);
+  grid-template-rows: repeat(8, 64px);
+  border: 6px solid #333;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  background: #695f5ff6;
+}
+
+.piece-img {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+  pointer-events: none; 
+}
+
+.square {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.sq.light {
+  background: var(--light);
+}
+
+.sq.dark {
+  background: var(--dark);
+}
+
+.sq.sel {
+  border: 2px solid rgba(172, 229, 190, 0.9);
+  border-radius: 50px;
+}
+
+.sq.move {
+  position: relative;
+}
+
+.sq.move::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: rgba(0, 0, 0, 0.35); /* muda a cor se quiser */
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.sq.move-capture {
+  position: relative;
+}
+
+.sq.move-capture::after {
+  content: "";
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  background: rgba(255, 0, 0, 0.130);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  pointer-events: none;
+
+  animation: capturePulse 1s ease-in-out infinite;
+}
+
+
+.piece-moved {
+  animation: pieceMoveSoft 0.18s ease-out;
+}
+
+
+.captured-anim {
+  animation: pieceCaptureSpin 1s ease-out forwards;
+  z-index: 5;
+  position: relative;
+}
+
+.info {
+  min-width: 260px;
+  max-width: 320px;
+}
+
+.info h1 {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+}
+
+#status {
+  font-size: 13px;
+  color: #ccc;
+}
+
+.controls {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+button {
+  background: #444;
+  border: none;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button:hover {
+  background: #555;
+}
+
+.fen-wrapper {
+  margin-top: 12px;
+}
+
+.fen {
+  margin-top: 4px;
+  font-family: monospace;
+  background: #111;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  word-wrap: break-word;
+  width: 390px;
+}
+
+.note {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #bbb;
+}
+
+@keyframes capturePulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+}
+
+@keyframes pieceCaptureSpin {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1.3) rotate(360deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(0) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes pieceMoveSoft {
+  0% {
+    transform: scale(0.9) translateY(-4px);
+  }
+  70% {
+    transform: scale(1.05) translateY(0);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
