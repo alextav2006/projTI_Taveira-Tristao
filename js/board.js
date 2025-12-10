@@ -461,27 +461,28 @@ function computeMoves(r, c) {
       }
     }
   } else if (p.type === "N") {
-    const deltas = [
-      [-2, -1],
-      [-2, 1],
-      [-1, -2],
-      [-1, 2],
-      [1, -2],
-      [1, 2],
-      [2, -1],
-      [2, 1],
-    ];
+     const deltas = [
+    [-2, -1], [-2, 1],
+    [-1, -2], [-1, 2],
+    [1, -2],  [1, 2],
+    [2, -1],  [2, 1],
+  ];
 
-    for (const [dr, dc] of deltas) {
-      const nr = r + dr;
-      const nc = c + dc;
-      if (
-        inBounds(nr, nc) &&
-        (!board[nr][nc] || board[nr][nc].color !== p.color)
-      ) {
-        moves.push({ r: nr, c: nc });
-      }
+  for (const [dr, dc] of deltas) {
+    const nr = r + dr;
+    const nc = c + dc;
+    if (!inBounds(nr, nc)) continue;
+
+    const target = board[nr][nc];
+
+    if (!target) {
+      // casa vazia
+      moves.push({ r: nr, c: nc });
+    } else if (target.color !== p.color) {
+      // captura
+      moves.push({ r: nr, c: nc, flags: { capture: true } });
     }
+  }
   } else if (p.type === "B" || p.type === "R" || p.type === "Q") {
     const dirs = [];
     if (p.type === "B" || p.type === "Q") {
@@ -509,37 +510,47 @@ function computeMoves(r, c) {
       }
     }
   } else if (p.type === "K") {
-    for (let dr = -1; dr <= 1; dr++) {
-      for (let dc = -1; dc <= 1; dc++) {
-        if (dr === 0 && dc === 0) continue;
-        const nr = r + dr;
-        const nc = c + dc;
-        if (
-          inBounds(nr, nc) &&
-          (!board[nr][nc] || board[nr][nc].color !== p.color)
-        ) {
-          moves.push({ r: nr, c: nc });
-        }
+    // movimentos normais do rei (1 casa em qualquer direção)
+  for (let dr = -1; dr <= 1; dr++) {
+    for (let dc = -1; dc <= 1; dc++) {
+      if (dr === 0 && dc === 0) continue;
+      const nr = r + dr;
+      const nc = c + dc;
+      if (!inBounds(nr, nc)) continue;
+
+      const target = board[nr][nc];
+
+      if (!target) {
+        moves.push({ r: nr, c: nc });
+      } else if (target.color !== p.color) {
+        moves.push({ r: nr, c: nc, flags: { capture: true } });
       }
     }
+  }
 
-    // roque simplificado (só casas livres + rei/torres não mexeram)
-    if (!kingMoved[p.color]) {
-      const row = p.color === "w" ? 7 : 0;
+  // roque com verificação de casas atacadas
+  if (!kingMoved[p.color]) {
+    const row = p.color === "w" ? 7 : 0;
+    const enemy = p.color === "w" ? "b" : "w";
 
-      // lado do rei
+    // o rei não pode estar em xeque na casa inicial
+    if (!isKingInCheck(p.color)) {
+      // roque pequeno (lado do rei)
       if (
         !rookMoved[p.color].h &&
         board[row][5] === null &&
         board[row][6] === null &&
         board[row][7] &&
         board[row][7].type === "R" &&
-        board[row][7].color === p.color
+        board[row][7].color === p.color &&
+        !isSquareAttackedOnBoard(board, row, 4, enemy) && // casa inicial (e1 / e8)
+        !isSquareAttackedOnBoard(board, row, 5, enemy) && // casa de passagem (f1 / f8)
+        !isSquareAttackedOnBoard(board, row, 6, enemy)    // casa final (g1 / g8)
       ) {
         moves.push({ r: row, c: 6, flags: { castling: "king" } });
       }
 
-      // lado da dama
+      // roque grande (lado da dama)
       if (
         !rookMoved[p.color].a &&
         board[row][1] === null &&
@@ -547,29 +558,71 @@ function computeMoves(r, c) {
         board[row][3] === null &&
         board[row][0] &&
         board[row][0].type === "R" &&
-        board[row][0].color === p.color
+        board[row][0].color === p.color &&
+        !isSquareAttackedOnBoard(board, row, 4, enemy) && // casa inicial (e1 / e8)
+        !isSquareAttackedOnBoard(board, row, 3, enemy) && // casa de passagem (d1 / d8)
+        !isSquareAttackedOnBoard(board, row, 2, enemy)    // casa final (c1 / c8)
       ) {
         moves.push({ r: row, c: 2, flags: { castling: "queen" } });
       }
     }
   }
+  }
 
   // filtra movimentos que deixam o próprio rei em xeque
-  return moves.filter((m) => !wouldLeaveKingInCheck(r, c, m, p.color));
+  return moves.filter(m => !wouldLeaveKingInCheck(r, c, m, p.color));
 }
+
+async function slidePiece(from, to) {
+  const fromSq = document.querySelector(
+    `.square[data-r="${from.r}"][data-c="${from.c}"]`
+  );
+  const toSq = document.querySelector(
+    `.square[data-r="${to.r}"][data-c="${to.c}"]`
+  );
+
+  if (!fromSq || !toSq) return;
+
+  const img = fromSq.querySelector("img");
+  if (!img) return;
+
+  const fromRect = fromSq.getBoundingClientRect();
+  const toRect = toSq.getBoundingClientRect();
+
+  const dx = toRect.left - fromRect.left;
+  const dy = toRect.top - fromRect.top;
+
+  // pôr por cima das outras
+  img.style.zIndex = "5";
+  img.style.transform = `translate(${dx}px, ${dy}px)`;
+
+  await new Promise((resolve) => {
+    const onEnd = () => {
+      img.removeEventListener("transitionend", onEnd);
+      resolve();
+    };
+
+    img.addEventListener("transitionend", onEnd);
+  });
+
+  // limpa estilos para não ficar sujo para o próximo render
+  img.style.transform = "";
+  img.style.zIndex = "";
+}
+
 
 // MOVIMENTO + ANIMAÇÕES
 async function makeMove(from, to, flags = {}) {
   const p = board[from.r][from.c];
   const dest = board[to.r][to.c];
 
-  // guardar último movimento
+  // guardar último movimento (para efeitos de .piece-moved)
   lastMove = {
     from: { r: from.r, c: from.c },
     to: { r: to.r, c: to.c },
   };
 
-  // snapshot para undo
+  // salvar snapshot para undo
   history.push({
     from,
     to,
@@ -583,9 +636,9 @@ async function makeMove(from, to, flags = {}) {
       : null,
   });
 
-  // animação de captura (normal ou en passant) — pirueta na peça comida
+  // 1) animação da peça capturada (se existir)
   if (flags.enpassant) {
-    const cap = flags.capture;
+    const cap = flags.capture; // { r, c } da peça capturada
     const sqDom = document.querySelector(
       `.square[data-r="${cap.r}"][data-c="${cap.c}"]`
     );
@@ -596,8 +649,10 @@ async function makeMove(from, to, flags = {}) {
         img.addEventListener("animationend", resolve, { once: true })
       );
     }
+    // en passant remove peão na casa cap (no estado lógico)
     board[cap.r][cap.c] = null;
   } else if (dest) {
+    // captura normal
     const sqDom = document.querySelector(
       `.square[data-r="${to.r}"][data-c="${to.c}"]`
     );
@@ -608,7 +663,13 @@ async function makeMove(from, to, flags = {}) {
         img.addEventListener("animationend", resolve, { once: true })
       );
     }
+    // o dest vai ser substituído pelo atacante depois
   }
+
+  // 2) animação de deslize da peça que se move
+  await slidePiece(from, to);
+
+  // 3) aplicar movimento ao estado lógico (board, flags, etc.)
 
   // roque
   if (flags.castling) {
@@ -616,11 +677,13 @@ async function makeMove(from, to, flags = {}) {
     const row = color === "w" ? 7 : 0;
 
     if (flags.castling === "king") {
+      // rei: e -> g (4 -> 6), torre: h -> f (7 -> 5)
       board[row][6] = p;
       board[from.r][from.c] = null;
       board[row][5] = board[row][7];
       board[row][7] = null;
     } else {
+      // rei: e -> c (4 -> 2), torre: a -> d (0 -> 3)
       board[row][2] = p;
       board[from.r][from.c] = null;
       board[row][3] = board[row][0];
@@ -631,35 +694,32 @@ async function makeMove(from, to, flags = {}) {
     rookMoved[p.color].a = true;
     rookMoved[p.color].h = true;
     enPassantTarget = null;
-    turn = turn === "w" ? "b" : "w";
-    startClock(turn);
-    updateStatus();
-    return;
-  }
-
-  // movimento normal
-  board[to.r][to.c] = p;
-  board[from.r][from.c] = null;
-
-  // duplo de peão -> en passant
-  if (flags.pawnDouble) {
-    enPassantTarget = { r: (from.r + to.r) / 2, c: from.c };
   } else {
-    enPassantTarget = null;
+    // movimento normal
+    board[to.r][to.c] = p;
+    board[from.r][from.c] = null;
+
+    // duplo de peão -> marca en passant
+    if (flags.pawnDouble) {
+      enPassantTarget = { r: (from.r + to.r) / 2, c: from.c };
+    } else {
+      enPassantTarget = null;
+    }
+
+    // promoção automática para dama
+    if (p.type === "P" && (to.r === 0 || to.r === 7)) {
+      p.type = "Q";
+    }
+
+    // flags de rei/torre
+    if (p.type === "K") kingMoved[p.color] = true;
+    if (p.type === "R") {
+      if (from.c === 0) rookMoved[p.color].a = true;
+      if (from.c === 7) rookMoved[p.color].h = true;
+    }
   }
 
-  // promoção -> dama
-  if (p.type === "P" && (to.r === 0 || to.r === 7)) {
-    p.type = "Q";
-  }
-
-  // flags rei/torre
-  if (p.type === "K") kingMoved[p.color] = true;
-  if (p.type === "R") {
-    if (from.c === 0) rookMoved[p.color].a = true;
-    if (from.c === 7) rookMoved[p.color].h = true;
-  }
-
+  // 4) muda a vez, atualiza relógio e status
   turn = turn === "w" ? "b" : "w";
   startClock(turn);
   updateStatus();
