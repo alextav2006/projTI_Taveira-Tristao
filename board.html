@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Xadrez — Demo</title>
+
+  <!-- Quando você criar o CSS, é só apontar pra ele aqui -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <section class="game-area">
+      <!-- Tabuleiro -->
+      <div id="board" class="board" aria-label="Tabuleiro de xadrez"></div>
+    </section>
+
+    <aside class="info">
+      <h1>Xadrez — roque &amp; en passant</h1>
+
+      <p>Vez: <strong id="turn">branco</strong></p>
+      <p id="status">Clique numa peça para ver movimentos.</p>
+
+      <div class="controls">
+        <button id="reset" type="button">Resetar</button>
+        <button id="undo" type="button">Desfazer</button>
+      </div>
+
+      <div class="fen-wrapper">
+        <h2>FEN atual</h2>
+        <pre id="fen" class="fen"></pre>
+      </div>
+
+      <p class="note">
+        Observações: Promoção automática para Rainha. Roque e en passant
+        suportados. Verificação de xeque/xemate pode ser adicionada depois.
+      </p>
+    </aside>
+  </main>
+
+  <!-- Quando formos colocar a lógica, adicionamos o script aqui -->
+  <!-- <script src="script.js"></script> -->
+</body>
+</html>
