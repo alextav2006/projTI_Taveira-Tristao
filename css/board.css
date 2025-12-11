@@ -46,6 +46,7 @@ shah {
 .game-area {
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 .board {
@@ -62,15 +63,23 @@ grid-template-rows: repeat(8, 1fr);
 }
 
 .piece-img {
-    position: absolute;
-    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: contain;
     pointer-events: none;
-    transform-origin: center center;
     transition: transform 0.18s ease-out;
+    transform-origin: center center;
 }
+
+#piece-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
 
 .sq {
   position: relative;

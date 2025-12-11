@@ -574,8 +574,6 @@ function computeMoves(r, c) {
 }
 
 async function slidePiece(from, to) {
-  const boardRect = boardEl.getBoundingClientRect();
-
   const fromSq = document.querySelector(`.sq[data-r="${from.r}"][data-c="${from.c}"]`);
   const toSq   = document.querySelector(`.sq[data-r="${to.r}"][data-c="${to.c}"]`);
 
@@ -584,24 +582,41 @@ async function slidePiece(from, to) {
   const img = fromSq.querySelector("img");
   if (!img) return;
 
-  // posições relativas À BOARD (não ao ecrã!)
-  const fromRect = fromSq.getBoundingClientRect();
-  const toRect   = toSq.getBoundingClientRect();
+  // 1. Criar uma cópia visual da peça (clone)
+  const ghost = img.cloneNode(true);
+  ghost.style.position = "fixed";
+  ghost.style.pointerEvents = "none";
+  ghost.style.zIndex = "9999";
+  ghost.style.transition = "transform 0.18s ease-out";
 
-  const dx = (toRect.left - fromRect.left);
-  const dy = (toRect.top  - fromRect.top);
+  const start = img.getBoundingClientRect();
+  ghost.style.left = start.left + "px";
+  ghost.style.top  = start.top + "px";
+  ghost.style.width  = start.width + "px";
+  ghost.style.height = start.height + "px";
 
-  // animação
-  img.style.transition = "transform 0.18s ease-out";
-  img.style.transform  = `translate(${dx}px, ${dy}px)`;
+  document.body.appendChild(ghost);
 
-  await new Promise(resolve => {
-    img.addEventListener("transitionend", resolve, { once: true });
-  });
+  // 2. Esperar o DOM estabilizar
+  await new Promise(resolve => requestAnimationFrame(resolve));
 
-  // reset
-  img.style.transform = "";
-  img.style.transition = "";
+  const end = toSq.getBoundingClientRect();
+  const dx = end.left - start.left;
+  const dy = end.top  - start.top;
+
+  // 3. Esconder temporariamente a peça real
+  img.style.opacity = "0";
+
+  // 4. Animar o ghost
+  ghost.style.transform = `translate(${dx}px, ${dy}px)`;
+
+  await new Promise(resolve =>
+    ghost.addEventListener("transitionend", resolve, { once: true })
+  );
+
+  // 5. Remover o ghost e mostrar a peça real
+  ghost.remove();
+  img.style.opacity = "1";
 }
 
 // MOVIMENTO + ANIMAÇÕES
@@ -665,6 +680,7 @@ async function makeMove(from, to, flags = {}) {
   await slidePiece(from, to);
 
   // 3) aplicar movimento ao estado lógico (board, flags, etc.)
+  
 
   // roque
   if (flags.castling) {
@@ -718,6 +734,10 @@ async function makeMove(from, to, flags = {}) {
   turn = turn === "w" ? "b" : "w";
   startClock(turn);
   updateStatus();
+
+  await new Promise(requestAnimationFrame);
+
+  render();
 }
 
 // UNDO
