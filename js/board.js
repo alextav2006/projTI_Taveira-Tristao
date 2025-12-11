@@ -123,7 +123,7 @@ function isSquareAttackedOnBoard(boardState, r, c, byColor) {
   const friend = enemy === "w" ? "b" : "w";
 
   // peões
-  const pawnDir = enemy === "w" ? -1 : 1;
+  const pawnDir = enemy === "w" ? 1 : -1;
   for (const dc of [-1, 1]) {
     const pr = r + pawnDir;
     const pc = c + dc;
@@ -335,7 +335,7 @@ function render() {
   for (let r = 0; r < 8; r++) {
     for (let c = 0; c < 8; c++) {
       const sq = document.createElement("div");
-      sq.className = "square sq " + ((r + c) % 2 === 0 ? "light" : "dark");
+      sq.className = "sq " + ((r + c) % 2 === 0 ? "light" : "dark");
       sq.dataset.r = r;
       sq.dataset.c = c;
 
@@ -574,42 +574,35 @@ function computeMoves(r, c) {
 }
 
 async function slidePiece(from, to) {
-  const fromSq = document.querySelector(
-    `.square[data-r="${from.r}"][data-c="${from.c}"]`
-  );
-  const toSq = document.querySelector(
-    `.square[data-r="${to.r}"][data-c="${to.c}"]`
-  );
+  const boardRect = boardEl.getBoundingClientRect();
+
+  const fromSq = document.querySelector(`.sq[data-r="${from.r}"][data-c="${from.c}"]`);
+  const toSq   = document.querySelector(`.sq[data-r="${to.r}"][data-c="${to.c}"]`);
 
   if (!fromSq || !toSq) return;
 
   const img = fromSq.querySelector("img");
   if (!img) return;
 
+  // posições relativas À BOARD (não ao ecrã!)
   const fromRect = fromSq.getBoundingClientRect();
-  const toRect = toSq.getBoundingClientRect();
+  const toRect   = toSq.getBoundingClientRect();
 
-  const dx = toRect.left - fromRect.left;
-  const dy = toRect.top - fromRect.top;
+  const dx = (toRect.left - fromRect.left);
+  const dy = (toRect.top  - fromRect.top);
 
-  // pôr por cima das outras
-  img.style.zIndex = "5";
-  img.style.transform = `translate(${dx}px, ${dy}px)`;
+  // animação
+  img.style.transition = "transform 0.18s ease-out";
+  img.style.transform  = `translate(${dx}px, ${dy}px)`;
 
-  await new Promise((resolve) => {
-    const onEnd = () => {
-      img.removeEventListener("transitionend", onEnd);
-      resolve();
-    };
-
-    img.addEventListener("transitionend", onEnd);
+  await new Promise(resolve => {
+    img.addEventListener("transitionend", resolve, { once: true });
   });
 
-  // limpa estilos para não ficar sujo para o próximo render
+  // reset
   img.style.transform = "";
-  img.style.zIndex = "";
+  img.style.transition = "";
 }
-
 
 // MOVIMENTO + ANIMAÇÕES
 async function makeMove(from, to, flags = {}) {
@@ -640,8 +633,9 @@ async function makeMove(from, to, flags = {}) {
   if (flags.enpassant) {
     const cap = flags.capture; // { r, c } da peça capturada
     const sqDom = document.querySelector(
-      `.square[data-r="${cap.r}"][data-c="${cap.c}"]`
-    );
+    `.sq[data-r="${cap.r}"][data-c="${cap.c}"]`
+  );
+
     const img = sqDom && sqDom.querySelector("img");
     if (img) {
       img.classList.add("captured-anim");
@@ -654,8 +648,9 @@ async function makeMove(from, to, flags = {}) {
   } else if (dest) {
     // captura normal
     const sqDom = document.querySelector(
-      `.square[data-r="${to.r}"][data-c="${to.c}"]`
+      `.sq[data-r="${to.r}"][data-c="${to.c}"]`
     );
+
     const img = sqDom && sqDom.querySelector("img");
     if (img) {
       img.classList.add("captured-anim");
