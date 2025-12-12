@@ -40,21 +40,25 @@ shah {
 .navigator {
     background-color: rgb(82, 83, 81);
     width: 30vh;
-    height: var(--viewWH);
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
 }
 
 .game-area {
+  flex: 1;
   display: flex;
   justify-content: center;
   position: relative;
 }
 
 .board {
-    transform: translateZ(0);
+  transform: translateZ(0);
   position: relative;
   display: grid;
   grid-template-columns: repeat(8, 1fr);
-grid-template-rows: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
   border: 5px solid #443;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
   background: #695f5ff6;
@@ -278,27 +282,29 @@ button:active {
   }
 }
 
-#tempo {
-    display: flex;
-    background-color: #443;
-    padding: 5px;
-    justify-content: center;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
-}
-#clock-w {
-    display: inline-flex;
-    background-color: white;
-    color: black;
-    font-size: 2em;
-    width: 49%;
-    justify-content: center;
+.board-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 0vh;
+  width: var(--viewWH);
 }
 
-#clock-b {
-    display: inline-flex;
-    background-color: black;
-    color: white;
-    font-size: 2em;
-    width: 49%;
-    justify-content: center;
+.clock {
+  font-size: calc(var(--viewWH) * 0.06);
+  font-weight: bold;
+  padding: 4px 18px;
+  width: fit-content;
+  user-select: none;
+  max-width: 100%;
+}
+
+.clock-black {
+  background: black;
+  color: white;
+}
+
+.clock-white {
+  background: white;
+  color: black;
 }

@@ -14,10 +14,15 @@
     </nav>
 
     <section class="game-area">
-      <!-- Tabuleiro -->
-      <div id="board" class="board" aria-label="Tabuleiro de xadrez"></div>
-      <div id="piece-layer"></div>
+        <div class="board-wrapper">
+            <div id="clock-b" class="clock clock-black">05:00</div>
+
+            <div id="board" class="board"></div>
+
+            <div id="clock-w" class="clock clock-white">05:00</div>
+        </div>
     </section>
+
 
     <aside class="info">
       <h1 id="shah"><shah>Shah</shah> — Pouco barulho! Atenção à partida.  </h1>
@@ -25,11 +30,7 @@
       <p>Vez: <strong id="turn">Capa Blanca</strong></p>
       <p id="status">Clique numa peça para ver movimentos.</p>
 
-      <p id="tempo">
-        <span id="clock-w">05:00</span>
-        <span id="clock-b">05:00</span>
-      </p>
-
+ 
       <button id="draw" type="button">Empate</button>
       <button id="back-menu" type="button">Voltar ao menu</button>
 
