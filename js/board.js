@@ -897,3 +897,25 @@ if (backMenuBtn) {
 
 // inicia o jogo
 initBoard();
+
+function computeMovesForColor(r, c, color) {
+    const oldTurn = turn;
+    turn = color;
+    const result = computeMoves(r, c);
+    turn = oldTurn;
+    return result;
+}
+
+// api para o bot utilizar
+window.ChessAPI = {
+    // Estado atual do jogo
+    getBoard: () => board,
+    getTurn: () => turn,
+    getKingMoved: () => kingMoved,
+    getRookMoved: () => rookMoved,
+    getEnPassantTarget: () => enPassantTarget,
+    isGameOver: () => gameOver,
+
+    // Função de movimento que aplica a jogada ao jogo principal
+    makeMove: (from, to, flags) => makeMove(from, to, flags),
+};

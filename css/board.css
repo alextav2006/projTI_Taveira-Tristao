@@ -3,7 +3,7 @@
   --dark: #8b4513ca;
   --sel: #fffa8b;
 
-  --viewWH: min(90vmin, 512px);
+  --viewWH: min(80vmin, 512px);
 }
 
 * {
@@ -12,20 +12,18 @@
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  display: flex;
   min-height: 100vh;
-  align-items: center;
+  align-items: space-between;
   margin: 0;
   background: #201f1f;
   color: #eee;
-  justify-content: space-around;
 }
 
 .container {
   display: flex;
   gap: 24px;
   align-items: flex-start;
-  padding: 16px;
+  justify-content: space-between;
 }
 
 shah {
@@ -38,19 +36,17 @@ shah {
 }
 
 .navigator {
+    display: flex;
     background-color: rgb(82, 83, 81);
     width: 30vh;
-    height: 100%;
-    position: fixed;
-    left: 0;
-    top: 0;
+    height: 100vh;
 }
 
 .game-area {
-  flex: 1;
   display: flex;
   justify-content: center;
   position: relative;
+  padding: 2vh;
 }
 
 .board {
@@ -164,8 +160,9 @@ shah {
 
 
 .info {
-  min-width: 260px;
-  max-width: 320px;
+  min-width: 30vh;
+  max-width: 100vh;
+  padding: 20px;
 }
 
 .info h1 {
@@ -227,14 +224,16 @@ button:active {
 }
 
 .fen {
-  margin-top: 4px;
   font-family: monospace;
   background: #111;
   padding: 8px;
   border-radius: 6px;
   font-size: 12px;
-  word-wrap: break-word;
-  width: 390px;
+
+  min-width: 0;
+  max-width: 20vw;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .note {
@@ -307,4 +306,11 @@ button:active {
 .clock-white {
   background: white;
   color: black;
+}
+
+@media screen and (max-width: 500px) {
+  body {
+    min-width: 500px;
+    min-height: 500px;
+  }
 }
