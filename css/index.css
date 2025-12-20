@@ -40,39 +40,42 @@ shah {
 
 
 .navigator {
+  display: inline-block;
+  background-color: #1a1919;
   width: 30vh;
-  background: var(--panel);
+  height: 100vh;
   border-right: 1px solid #ffffff18;
 }
 
-.navigator li {
-  list-style: none;
-}
-
-.logo img {
+.navigator .logo {
+  display: flex;
   width: 100%;
-  background: rgba(69, 70, 69, 0.25);
 }
 
+.navigator .logo img {
+  max-width: 100%;
+  background-color: rgba(69, 70, 69, 0.241);
+}
 
-.abas {
+.navigator .abas {
   text-align: right;
 }
 
-.abas a {
+.navigator .abas a {
   text-decoration: none;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.948);
   font-size: 1.5em;
 }
 
-.abas h4 {
-  padding: 0 1vw 5vh 0;
+.navigator .abas h4 {
+  padding-right: 1vw;
+  padding-bottom: 5vh;
+  margin: 0;
 }
 
-.abas h4:hover {
-  background: rgba(69, 70, 69, 0.12);
+.navigator .abas h4:hover {
+  background: rgba(69, 70, 69, 0.113);
 }
-
 
 .game-area {
   flex: 1;
