@@ -3,7 +3,7 @@
   --dark: #8b4513ca;
   --sel: #fffa8b;
 
-  --viewWH: min(80vmin, 512px);
+  --viewWH: min(76vmin, 512px);
 }
 
 * {
@@ -27,7 +27,7 @@ body {
 }
 
 shah {
-    color: rgba(231, 154, 11, 0.871);
+    color: #5c53ae;
     font-size: 1.15em;
 }
 
@@ -36,10 +36,44 @@ shah {
 }
 
 .navigator {
-    display: flex;
-    background-color: rgb(82, 83, 81);
+    display: inline-block;
+    background-color: #1a1919;
     width: 30vh;
     height: 100vh;
+    border-right: 1px solid #ffffff18;
+
+  .logo {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+
+  .logo img {
+    max-width: 100%;
+    background-color: rgba(69, 70, 69, 0.241);
+  }
+
+  .abas {
+    text-align: right;
+
+    a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.948);
+      font-size: 1.5em;
+    }
+
+    h4 {
+      padding-right: 1vw;
+      padding-bottom: 5vh;
+      margin: 0;
+    }
+    
+  }
+
+  .abas h4:hover {
+    background: rgba(69, 70, 69, 0.113);
+  }
+  
 }
 
 .game-area {
@@ -160,8 +194,10 @@ shah {
 
 
 .info {
-  min-width: 30vh;
-  max-width: 100vh;
+  min-width: 10vh;
+  min-height: 10vh;
+  max-width: 40vh;
+  max-height: 40vh;
   padding: 20px;
 }
 
@@ -296,6 +332,10 @@ button:active {
   width: fit-content;
   user-select: none;
   max-width: 100%;
+  border-radius: 56px;
+
+  margin-top: 1.2vh;
+  margin-bottom: 1.2vh;
 }
 
 .clock-black {
@@ -306,11 +346,4 @@ button:active {
 .clock-white {
   background: white;
   color: black;
-}
-
-@media screen and (max-width: 500px) {
-  body {
-    min-width: 500px;
-    min-height: 500px;
-  }
 }
