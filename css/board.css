@@ -371,3 +371,17 @@ button:active {
   background: white;
   color: black;
 }
+
+/* responsividade: em telas pequenas o menu volta a normal */
+@media (max-width: 900px) {
+  .navigator {
+    position: relative;
+    width: 33%;
+    height: auto;
+  }
+
+  .info {
+    position: relative;
+    width: 23%;
+  }
+}

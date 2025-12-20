@@ -85,7 +85,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  margin-left: 260px; /* mesma largura do menu */
+  margin-left: 5vw; 
   padding: 24px;
 }
 
@@ -93,7 +93,7 @@ body {
 @media (max-width: 900px) {
   .navigator {
     position: relative;
-    width: 100%;
+    width: 33%;
     height: auto;
   }
   .game-area {
@@ -106,14 +106,14 @@ body {
   background: var(--panel);
   border: 1px solid #ffffff18;
   border-radius: 18px;
-  padding: 32px;
+  padding: 1vh;
   max-width: 720px;
   width: 100%;
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
 
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 4ch;
 }
 
 /* TÍTULO */
@@ -132,7 +132,8 @@ body {
 /* RESPONSIVO (MOBILE MODE) */
 @media (max-width: 768px) {
   .navigator {
-    width: 200px;
+    width: 20%;
+    font-size: 50%;
   }
 
   .history-box {
@@ -152,21 +153,7 @@ body {
   overflow-y: auto;
 }
 
-.game-area {
-  display: flex;
-  gap: 24px;
-  align-items: flex-start;
-}
-
 /* scroll suave ao clicar nos links */
 html {
   scroll-behavior: smooth;
-}
-
-/* responsividade */
-@media (max-width: 900px) {
-  .game-area {
-    flex-direction: column;
-  }
-
 }
