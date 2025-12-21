@@ -36,7 +36,6 @@ body {
 
 /* NAV */
 .navigator {
-<<<<<<< HEAD
   position: fixed;
   inset: 0 auto 0 0;
   width: 260px;
@@ -49,67 +48,32 @@ body {
 
 .navigator ul {
   list-style: none;
-=======
->>>>>>> b2bf9092fba379aaf49bda9a1d77ac141d99ec3d
   display: flex;
   flex-direction: column;
-  background-color: #1a1919;
-  width: clamp(150px, 15vw, 250px);
-  height: auto;
-  min-height: 100vh;
-  border-right: 1px solid #ffffff18;
+}
 
-<<<<<<< HEAD
 .navigator .logo img {
   width: 100%;
   background: rgba(69, 70, 69, 0.25);
 }
-=======
-  li {
-    list-style: none;
-  }
 
-  .logo {
-    position: relative;
-    top: 0;
-    display: flex;
-    width: 100%;
-    height: 100%;
-  }
->>>>>>> b2bf9092fba379aaf49bda9a1d77ac141d99ec3d
+.navigator .abas {
+  text-align: right;
+}
 
-  .logo img {
-    max-width: 100%;
-    background-color: rgba(69, 70, 69, 0.241);
-  }
+.navigator .abas a {
+  text-decoration: none;
+  color: var(--text);
+}
 
-  .abas {
-    text-align: right;
+.navigator .abas h4 {
+  font-size: 1.5em;
+  padding: 0 1vw 5vh 0;
+  transition: background 0.2s ease;
+}
 
-    a {
-      text-decoration: none;
-      color: rgba(255, 255, 255, 0.948);
-      font-size: 1.5em;
-    }
-
-    h4 {
-      padding-right: 1vw;
-      padding-bottom: 5vh;
-      margin: 0;
-      transition: background-color 400ms ease;
-    }
-    
-  }
-
-  #nav_highlight {
-    background-color: #161616;
-  }
-
-  .abas h4:hover {
-    background-color: rgba(69, 70, 69, 0.113);
-    transition: background-color 400ms ease;
-  }
-  
+.navigator .abas h4:hover {
+  background: rgba(69, 70, 69, 0.12);
 }
 
 /* CONTEÚDO */
