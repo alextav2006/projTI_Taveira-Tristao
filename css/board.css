@@ -400,6 +400,15 @@ button:active {
     background-blend-mode: normal;
   }
 
+  .clock-white, .sq.light, img {
+    color-scheme: light; 
+    forced-color-adjust: none;
+  }
+
+  .sq.light {
+    background-color: var(--light) !important;
+  }
+
   .info {
     position: relative;
     width: 33%;
