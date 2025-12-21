@@ -361,6 +361,7 @@ function render() {
         const img = document.createElement("img");
         img.src = pieceSymbols[key];
         img.className = "piece-img";
+        img.alt = `Peça de xadrez: ${p.type} ${p.color === 'w' ? 'Branca' : 'Preta'}`;
 
         // pop suave no destino do último movimento
         if (
