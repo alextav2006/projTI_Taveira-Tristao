@@ -382,7 +382,6 @@ button:active {
 @media (max-width: 900px) {
   * {
     flex-direction: column;
-    justify-content: center;
   }
 
   .navigator {
@@ -396,21 +395,15 @@ button:active {
     transform: scale(1.1);
   }
 
-  .sq {
-    background-blend-mode: normal;
-  }
-
-  .clock-white, .sq.light, img {
-    color-scheme: light; 
-    forced-color-adjust: none;
-  }
-
-  .sq.light {
-    background-color: var(--light) !important;
-  }
-
   .info {
     position: relative;
     width: 33%;
+  }
+}
+
+/*responsividade para desktops ou superior*/
+@media (min-width: 1920px) {
+  .container {
+    justify-content: center;
   }
 }
