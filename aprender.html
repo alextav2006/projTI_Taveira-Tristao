@@ -3,51 +3,148 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>shah.io | Home</title>
-
-  <link rel="stylesheet" href="css/index.css">
+  <title>shah.io | Aprender Xadrez</title>
+  <link rel="stylesheet" href="css/historia.css">
 </head>
 <body>
   <main class="container">
 
+    <!-- MENU -->
+    <nav class="navigator">
+      <ul>
+        <li class="logo">
+          <a href="index.html">
+            <img src="img/logo.png" alt="shah.io">
+          </a>
+        </li>
 
-   <nav class="navigator">
-  <li>
-    <a class="logo" href="index.html">
-      <img src="img/logo.png" alt="shah.io">
-    </a>
-  </li>
+        <li class="abas"><a href="board.html"><h4>Jogar</h4></a></li>
+        <li class="abas"><a href="historia.html"><h4>História</h4></a></li>
+        <li class="abas"><a href="aprender.html"><h4>Aprender</h4></a></li>
+        <li class="abas"><a href="sobre.html"><h4>Sobre</h4></a></li>
+      </ul>
+    </nav>
 
-  <li class="abas">
-    <a href="board.html">
-      <h4>Jogar</h4>
-    </a>
-  </li>
+    <!-- CONTEÚDO -->
+    <section class="game-area">
 
-  <li class="abas">
-    <a href="historia.html">
-      <h4>História</h4>
-    </a>
-  </li>
+      <!-- TEXTO -->
+      <div class="history-box">
 
-  <li class="abas">
-    <a href="aprender.html">
-      <h4>Aprender</h4>
-    </a>
-  </li>
+        <h1 id="intro">Introdução ao Xadrez</h1>
+        <p>
+  O xadrez é um jogo de estratégia disputado entre dois jogadores em um tabuleiro
+  composto por 64 casas. Não se trata apenas de mover peças aleatoriamente, mas de
+  planejar jogadas, antecipar ações do adversário e construir estratégias ao longo
+  da partida. O objetivo final é alcançar o xeque-mate por meio de raciocínio lógico
+  e tomada de decisões precisas.
+</p>
 
-  <li class="abas">
-    <a href="sobre.html">
-      <h4>Sobre</h4>
-    </a>
-  </li>
-</nav>
 
-        <p class="note">
-        </p>
+
+
+        <h1 id="tabuleiro">O Tabuleiro</h1>
+       <p>
+  O tabuleiro de xadrez é formado por oito colunas, identificadas pelas letras de
+  “a” a “h”, e oito linhas numeradas de 1 a 8. Uma regra fundamental para a correta
+  disposição do tabuleiro é que a casa branca deve sempre estar posicionada no canto
+  inferior direito de cada jogador.
+</p>
+
+
+        <img src="img/tabuleiro xadres.png" alt="Coordenadas do tabuleiro" class="content-img">
+
+        <h1 id="pecas">As Peças</h1>
+        <p>
+  Cada jogador inicia a partida com 16 peças: oito peões, duas torres, dois cavalos,
+  dois bispos, uma dama e um rei. Cada peça possui movimentos específicos e funções
+  distintas dentro do jogo, exigindo do jogador a compreensão de suas características
+  para uma utilização estratégica eficiente.
+</p>
+
+
+        <img src="img/peças.png" alt="Peças de xadrez" class="content-img">
+
+        <h1 id="movimentos">Movimentos Básicos</h1>
+        <p>
+  Os peões avançam verticalmente, os cavalos realizam movimentos em “L”, os bispos
+  deslocam-se pelas diagonais, as torres controlam colunas e linhas, enquanto a dama
+  combina os movimentos da torre e do bispo, sendo a peça com maior mobilidade no jogo.
+</p>
+
+
+        <img src="img/movimento.png" alt="Movimentos das peças" class="content-img">
+
+        <h1 id="objetivo">Objetivo do Jogo</h1>
+        <p>
+  O objetivo do xadrez é aplicar o xeque-mate ao rei adversário. Isso ocorre quando o
+  rei se encontra sob ataque e não existe nenhuma jogada legal que possa evitar a
+  captura. Quando essa situação é alcançada, a partida é encerrada imediatamente.
+</p>
+
+
+        <img src="img/xeque mate.png" alt="Exemplo de checkmate" class="content-img">
+
+
+        <h1 id="en-passant">En Passant</h1>
+<p>
+  O <strong>En Passant</strong> é um movimento especial realizado exclusivamente pelos
+  peões e ocorre em uma situação específica. Quando um peão adversário avança duas
+  casas a partir de sua posição inicial e passa ao lado de um peão inimigo, este pode
+  capturá-lo como se ele tivesse avançado apenas uma casa.
+</p>
+
+<p>
+  Essa captura deve ser executada obrigatoriamente no lance imediatamente seguinte
+  ao avanço do peão adversário. Caso contrário, o direito ao En Passant é perdido.
+  Essa regra existe para impedir que um peão evite o confronto direto ao avançar duas
+  casas de uma só vez.
+</p>
+
+
+<img src="img/n passant.png" alt="Exemplo de En Passant" class="content-img">
+
+<h1 id="roque">Roque (Castelar)</h1>
+<p>
+  O <strong>roque</strong> é um movimento especial que envolve o rei e uma das torres,
+  tendo como principal objetivo aumentar a segurança do rei e ativar a torre.
+  Trata-se de um dos poucos lances em que duas peças se movimentam simultaneamente.
+</p>
+
+<p>
+  Existem dois tipos de roque: o <strong>roque pequeno</strong>, realizado pelo lado
+  do rei, e o <strong>roque grande</strong>, realizado pelo lado da dama. Nesse lance,
+  o rei move-se duas casas em direção à torre, e a torre é posicionada na casa
+  imediatamente ao lado do rei.
+</p>
+
+<p>
+  Para que o roque seja permitido, algumas condições devem ser respeitadas:
+</p>
+html
+Copiar código
+<p>
+  Caso qualquer uma dessas condições não seja atendida, o roque não pode ser
+  realizado de forma legal.
+</p>
+
+<img src="img/castelar.png" alt="Exemplo de roque no xadrez" class="content-img">
+
+      </div>
+
+      <!-- ÍNDICE -->
+      <aside class="index-box">
+        <h3>Aprender</h3>
+        <ul>
+          <li><a href="#intro">Introdução</a></li>
+          <li><a href="#tabuleiro">Tabuleiro</a></li>
+          <li><a href="#pecas">Peças</a></li>
+          <li><a href="#movimentos">Movimentos</a></li>
+          <li><a href="#objetivo">Objetivo</a></li>
+        </ul>
       </aside>
-    </section>
 
+    </section>
   </main>
 </body>
 </html>
