@@ -35,23 +35,20 @@ body {
 
 
 .navigator {
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 260px;
   min-width: 220px;
   height: 100vh;
-  background: var(--panel);
-  border-right: 1px solid var(--border);
+  background-color: var(--panel);
+  border-right: 1px solid #ffffff18;
+
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto; 
   padding-top: 20px;
-  overflow-y: auto;
 }
 
-.navigator ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-}
 
 .navigator li {
   list-style: none;
@@ -62,19 +59,17 @@ body {
   background: rgba(69, 70, 69, 0.25);
 }
 
-.navigator .abas {
-  text-align: right;
-}
+  .abas {
+    text-align: right;
 
 .navigator .abas a {
   text-decoration: none;
-  color: var(--text);
+  color: #fff;
+  font-size: 1.5em;
 }
 
 .navigator .abas h4 {
-  font-size: 1.5em;
   padding: 0 1vw 5vh 0;
-  transition: background 0.2s ease;
 }
 
 .navigator .abas h4:hover {
@@ -89,10 +84,24 @@ body {
   gap: 24px;
   align-items: flex-start;
   justify-content: center;
-  flex: 1;
+  align-items: flex-start;
+  margin-left: 260px; /* mesma largura do menu */
+  padding: 24px;
 }
 
+/* responsividade: em telas pequenas o menu volta a normal */
+@media (max-width: 900px) {
+  .navigator {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+  .game-area {
+    margin-left: 0;
+  }
+}
 
+/* CARD DA HISTÓRIA */
 .history-box {
   max-width: 800px;
   width: 100%;
@@ -100,11 +109,14 @@ body {
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 18px;
+  padding: 32px;
+  max-width: 720px;
+  width: 100%;
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
 
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 4ch;
 }
 
 .history-box h1 {
@@ -132,9 +144,7 @@ body {
 /* RESPONSIVO */
 @media (max-width: 900px) {
   .navigator {
-    position: relative;
-    width: 100%;
-    height: auto;
+    width: 200px;
   }
 
   .game-area {
@@ -152,3 +162,31 @@ body {
     font-size: 1.5em;
   }
 }
+.history-box {
+  max-width: 800px;
+  padding: 24px;
+  background-color: #1a1919;
+  border-radius: 12px;
+  color: #eee;
+  overflow-y: auto;
+}
+
+.game-area {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+/* scroll suave ao clicar nos links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* responsividade */
+@media (max-width: 900px) {
+  .game-area {
+    flex-direction: column;
+  }
+
+}
+  }

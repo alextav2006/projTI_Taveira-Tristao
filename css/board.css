@@ -37,8 +37,9 @@ shah {
 .navigator {
   display: inline-block;
   background-color: #1a1919;
-  width: 30vh;
-  height: 100vh;
+  width: 15vw;
+  height: auto;
+  min-height: 100vh;
   border-right: 1px solid #ffffff18;
 
   .logo {
@@ -67,12 +68,18 @@ shah {
       padding-right: 1vw;
       padding-bottom: 5vh;
       margin: 0;
+      transition: background-color 400ms ease;
     }
     
   }
 
+  #nav_highlight {
+    background-color: #161616;
+  }
+
   .abas h4:hover {
-    background: rgba(69, 70, 69, 0.113);
+    background-color: rgba(69, 70, 69, 0.113);
+    transition: background-color 400ms ease;
   }
   
 }
@@ -363,4 +370,18 @@ button:active {
 .clock-white {
   background: white;
   color: black;
+}
+
+/* responsividade: em telas pequenas o menu volta a normal */
+@media (max-width: 900px) {
+  .navigator {
+    position: relative;
+    width: 33%;
+    height: auto;
+  }
+
+  .info {
+    position: relative;
+    width: 23%;
+  }
 }
