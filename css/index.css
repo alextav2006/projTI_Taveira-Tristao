@@ -43,14 +43,17 @@ shah {
 
 /* NAVIGATION */
 .navigator {
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   background-color: #1a1919;
-  
-  width: 15vw;
-  min-height: 100vh;
-  
+  width: clamp(150px, 15vw, 250px);
   height: auto;
+  min-height: 100vh;
   border-right: 1px solid #ffffff18;
+
+  li {
+    list-style: none;
+  }
 
   .logo {
     position: relative;
@@ -81,6 +84,10 @@ shah {
       transition: background-color 400ms ease;
     }
     
+  }
+
+  #nav_highlight {
+    background-color: #161616;
   }
 
   .abas h4:hover {

@@ -4,6 +4,7 @@
   --sel: #fffa8b;
 
   --viewWH: min(76vmin, 512px);
+  --viewMobile: min(70vmin, 512px);
 }
 
 * {
@@ -25,8 +26,8 @@ body {
 }
 
 shah {
-    color: #5c53ae;
-    font-size: 1.15em;
+  color: #786ed2;
+  font-size: 1.15em;
 }
 
 #shah {
@@ -34,12 +35,18 @@ shah {
 }
 
 .navigator {
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   background-color: #1a1919;
   width: clamp(150px, 15vw, 250px);
   height: auto;
   min-height: 100vh;
   border-right: 1px solid #ffffff18;
+
+  ul {
+    padding: 0;
+    margin-block-start: 0;
+  }
 
   li {
     list-style: none;
@@ -205,7 +212,8 @@ shah {
 
 
 .info {
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   width: 20%;
   height: 100%;
 
@@ -295,7 +303,7 @@ button:active {
 .note {
   margin-top: 10px;
   font-size: 12px;
-  color: #bbb;
+  color: #ddd;
 
   width: 30%;
   height: 10%;
@@ -380,24 +388,40 @@ button:active {
 
 /* responsividade: em telas pequenas o menu volta a normal */
 @media (max-width: 900px) {
-  * {
+  .container {
     flex-direction: column;
+    align-items: center;
+    gap: 20px;
   }
 
   .navigator {
+    order: 3;
     position: relative;
-    width: 33%;
-    height: auto;
+    width: 100%;
+    min-height: auto;
   }
   
   .board-wrapper {
-    padding-left: 10vw;
+    order: 1;
+    margin-top: 3vh;
     transform: scale(1.1);
   }
 
+  .clock {
+    font-size: calc(var(--viewMobile) * 0.06);
+  }
+
+  .board {
+    height: var(--viewMobile);
+    width: var(--viewMobile);
+  }
+
   .info {
+    order: 2;
     position: relative;
-    width: 33%;
+    width: 90%;
+    padding: 0;
+    max-height: none;
   }
 }
 
@@ -405,5 +429,10 @@ button:active {
 @media (min-width: 1920px) {
   .container {
     justify-content: center;
+    gap: 5vw;
+  }
+
+  .controls {
+    margin-left: 1vw;
   }
 }
