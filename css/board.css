@@ -26,8 +26,8 @@ body {
 }
 
 shah {
-    color: #5c53ae;
-    font-size: 1.15em;
+  color: #786ed2;
+  font-size: 1.15em;
 }
 
 #shah {
@@ -42,6 +42,11 @@ shah {
   height: auto;
   min-height: 100vh;
   border-right: 1px solid #ffffff18;
+
+  ul {
+    padding: 0;
+    margin-block-start: 0;
+  }
 
   li {
     list-style: none;
