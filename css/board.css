@@ -129,8 +129,8 @@ shah {
 .sq {
   position: relative;
   transform: translateZ(0);
- width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -369,13 +369,13 @@ button:active {
 }
 
 .clock-black {
-  background: black;
-  color: white;
+  background: black !important;
+  color: white !important;
 }
 
 .clock-white {
-  background: white;
-  color: black;
+  background: white !important;
+  color: black !important;
 }
 
 /* responsividade: em telas pequenas o menu volta a normal */
@@ -394,6 +394,10 @@ button:active {
   .board-wrapper {
     padding-left: 10vw;
     transform: scale(1.1);
+  }
+
+  .sq {
+    background-blend-mode: normal;
   }
 
   .info {
