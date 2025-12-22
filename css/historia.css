@@ -34,48 +34,6 @@ body {
   min-height: 100vh;
 }
 
-/* NAV */
-.navigator {
-  position: fixed;
-  inset: 0 auto 0 0;
-  width: 260px;
-  min-width: 220px;
-  background: var(--panel);
-  border-right: 1px solid var(--border);
-  padding-top: 20px;
-  overflow-y: auto;
-}
-
-.navigator ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-}
-
-.navigator .logo img {
-  width: 100%;
-  background: rgba(69, 70, 69, 0.25);
-}
-
-.navigator .abas {
-  text-align: right;
-}
-
-.navigator .abas a {
-  text-decoration: none;
-  color: var(--text);
-}
-
-.navigator .abas h4 {
-  font-size: 1.5em;
-  padding: 0 1vw 5vh 0;
-  transition: background 0.2s ease;
-}
-
-.navigator .abas h4:hover {
-  background: rgba(69, 70, 69, 0.12);
-}
-
 /* CONTEÚDO */
 .game-area {
   margin-left: 260px;
