@@ -4,6 +4,8 @@
   --text: #eee;
   --accent: #5c53ae;
   --border: #ffffff18;
+
+  --gap: 5vw;
 }
 
 /* RESET */
@@ -32,23 +34,21 @@ body {
 .container {
   display: flex;
   min-height: 100vh;
+  justify-content: space-between;
+  gap: var(--gap)
 }
 
 /* CONTEÚDO */
 .game-area {
-  margin-left: 260px;
   padding: 24px;
   display: flex;
-  gap: 24px;
-  justify-content: center;
   align-items: flex-start;
-  flex: 1;
+  gap: var(--gap)
 }
 
 /* CARD PRINCIPAL */
 .history-box {
-  width: 100%;
-  max-width: 800px;
+  width: 80%;
   padding: 32px;
   background: var(--panel);
   border: 1px solid var(--border);
@@ -110,7 +110,7 @@ body {
   color: #ccc;
 
   transition:
-    background 0.2s ease,
+    background-color 0.2s ease,
     color 0.2s ease,
     transform 0.15s ease;
 }
@@ -139,32 +139,36 @@ body {
   object-fit: cover;
 }
 
-/* RESPONSIVO */
+/* RESPONSIVO mobile*/
 @media (max-width: 900px) {
-  .navigator {
-    position: relative;
+  .container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
     width: 100%;
-    height: auto;
   }
 
   .game-area {
     margin-left: 0;
     flex-direction: column;
+    width: 90%;
   }
 
-  .index-box {
-    position: relative;
-    top: 0;
-    width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
   .history-box {
+    width: 90%;
+    order: 2;
     padding: 24px;
   }
 
   .history-box h1 {
     font-size: 1.5em;
+  }
+
+  .index-box {
+    width: 90%;
+    order: 1;
+    position: relative;
+    top: 0;
   }
 }
