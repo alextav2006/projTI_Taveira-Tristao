@@ -44,7 +44,7 @@
       padding-right: 1vw;
       padding-bottom: 5vh;
       margin: 0;
-      transition: background-color 400ms ease;
+      transition: background-color 210ms ease-in;
     }
     
   }
@@ -55,7 +55,7 @@
 
   .abas h4:hover {
     background-color: rgba(69, 70, 69, 0.113);
-    transition: background-color 400ms ease;
+    transition: background-color 100ms ease-in-out;
   }
   
 }
