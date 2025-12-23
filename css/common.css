@@ -4,7 +4,9 @@
   background-color: #1a1919;
   width: clamp(150px, 15vw, 250px);
   height: auto;
+
   min-height: 100vh;
+  min-width: 18vw;
   border-right: 1px solid #ffffff18;
 
   ul {
@@ -56,4 +58,20 @@
     transition: background-color 400ms ease;
   }
   
+}
+
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .navigator {
+    order: 99;
+    min-height: auto;
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #ffffff18;
+  }
 }
