@@ -8,7 +8,6 @@
   --gap: 5vw;
 }
 
-/* RESET */
 *,
 *::before,
 *::after {
@@ -17,7 +16,7 @@
   padding: 0;
 }
 
-/* BASE */
+
 html {
   scroll-behavior: smooth;
 }
@@ -30,7 +29,7 @@ body {
   color: var(--text);
 }
 
-/* LAYOUT */
+
 .container {
   display: flex;
   min-height: 100vh;
@@ -38,7 +37,7 @@ body {
   gap: var(--gap)
 }
 
-/* CONTEÚDO */
+
 .game-area {
   padding: 24px;
   display: flex;
@@ -46,7 +45,7 @@ body {
   gap: var(--gap)
 }
 
-/* CARD PRINCIPAL */
+
 .history-box {
   width: 80%;
   padding: 32px;
@@ -71,7 +70,7 @@ body {
   color: #ddd;
 }
 
-/* ÍNDICE */
+
 .index-box {
   position: sticky;
   top: 24px;
@@ -126,7 +125,7 @@ body {
   color: #fff;
 }
 
-/* IMAGENS */
+
 .content-img {
   width: 100%;
   max-width: 480px;
@@ -139,7 +138,7 @@ body {
   object-fit: cover;
 }
 
-/* RESPONSIVO mobile*/
+
 @media (max-width: 900px) {
   .container {
     flex-direction: column;
